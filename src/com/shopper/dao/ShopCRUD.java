@@ -8,11 +8,22 @@ import java.util.ArrayList;
 
 import com.shopper.entity.Shop;
 
+/**
+ * Responsible for performing all the CRUD operations on 
+ * Shop table of the database.
+ * @author 1021124
+ *
+ */
 public class ShopCRUD
 {
 	private static Connection conn = ConnectionManager.getConnection();
 	private static String query = null;
 	
+	/**
+	 * Fetches the shop details from the database and
+	 * add it to ArrayList<Shop>
+	 * @return list of all the shops with their details
+	 */
 	public static ArrayList<Shop> read()
 	{
 		ArrayList<Shop> shopList = new ArrayList<Shop>();
@@ -39,6 +50,12 @@ public class ShopCRUD
 		return shopList;
 	}
 	
+	/**
+	 * Fetches a specific shop based on the shop id
+	 * @param id String containg id of the shop
+	 * @return Shop object as obtained from db if success,
+	 * 	null otherwise
+	 */
 	public static Shop read(String id)
 	{
 		query = "SELECT * FROM shop WHERE id = \'" + id +"\'";

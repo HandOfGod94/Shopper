@@ -18,11 +18,14 @@ import com.shopper.dao.ShoppingDataDao;
  * @author 1021124
  *
  */
-
 @Controller
 public class ShopManagementController
 {
 
+	/**
+	 * The main view with which shopkeeper will interact
+	 * @return String having full path to view present in WebContent
+	 */
 	@RequestMapping(value = "/shopManage", method = { RequestMethod.POST,
 			RequestMethod.GET })
 	public String shopManage()
@@ -30,6 +33,13 @@ public class ShopManagementController
 		return "shop-manage/shop-id";
 	}
 
+	/**
+	 * View containing shop id input field.
+	 * It also adds id to current session for future use.
+	 * @param id shop's id as present in the database
+	 * @param session {@link HttpSession} for storing id of the shop
+	 * @return String having full path to view present in WebContet
+	 */
 	@RequestMapping("/shopManage/selectInterface")
 	public String shopSelectInterface(@RequestParam("id") String id,
 			HttpSession session)
@@ -38,12 +48,26 @@ public class ShopManagementController
 		return "/shop-manage/shop-select-interface";
 	}
 
+	/**
+	 * Transaction view where shop keeper can manage
+	 * sale and return of various products
+	 * @param session {@link HttpSession} having main session value as id of the shop
+	 * @return String having full path to view present in WebContent
+	 */
 	@RequestMapping("shopManage/transaction")
 	public String transaction(HttpSession session)
 	{
 		return "shop-manage/transaction";
 	}
 
+	/**
+	 * Analysis view where the shop owner can review various
+	 * analytical aspects of various products present in his/her shop
+	 * along with some key market details of important product.
+	 * @param model {@link ModelMap} of the application for adding various attributes
+	 * @param session {@link HttpSession} of the application
+	 * @return String having full path to view present in WebContent. 
+	 */
 	@RequestMapping("shopManage/analysis")
 	public String analysis(ModelMap model, HttpSession session)
 	{

@@ -74,5 +74,6 @@ function check()
 			</tr>
 		</table>
 	</form>
+	${result}
 </body>
 </html>
