@@ -47,5 +47,32 @@ public class ProductCRUD
 			return null;
 		}
 	}
+	
+	public static Product read(String productId)
+	{
+		conn = ConnectionManager.getConnection();
+		query = "SELECT * FROM product WHERE id = \'" + productId + "\'";
+		Product product = new Product();
+		try
+		{
+			Statement stmnt = conn.createStatement();
+			ResultSet resultSet = stmnt.executeQuery(query);
+			if (resultSet.next())
+			{
+				
+				product.setId(resultSet.getString("id"));
+				product.setName(resultSet.getString("name"));
+				product.setManufacturer(resultSet.getString("manufacturer"));
+				product.setPrice(resultSet.getDouble("price"));
+				product.setCategory(resultSet.getString("category"));
+			}
+			return product;
+
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }

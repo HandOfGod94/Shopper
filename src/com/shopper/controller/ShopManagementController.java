@@ -72,6 +72,7 @@ public class ShopManagementController
 	public String analysis(ModelMap model, HttpSession session)
 	{
 		String shopId = (String) session.getAttribute("id");
+		model.addAttribute("overallMaxSoldProduct", ShoppingDataDao.getOverallMaxSoldProduct());
 		model.addAttribute("shopDataList", ShoppingDataDao.read(shopId));
 		model.addAttribute("shop", ShopCRUD.read(shopId));
 		return "shop-manage/analysis";
