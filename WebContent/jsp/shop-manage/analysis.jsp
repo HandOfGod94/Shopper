@@ -48,6 +48,7 @@
 			<th>Product Name</th>
 			<th>Sale Percentage</th>
 			<th>Sale Category</th>
+			<th>Semantic Result</th>
 		</tr>
 		<c:set scope="page" var="i" value="${0}" />
 		<c:forEach items="${shopDataList}" var="data">
@@ -57,6 +58,7 @@
 				<td>${data.productName}</td>
 				<td>${data.salePercent}</td>
 				<td>${data.saleCategory}</td>
+				<td>${semanticResults.get(i)}</td>
 			<tr>
 		</c:forEach>
 	</table>

@@ -47,7 +47,14 @@ public class ProductCRUD
 			return null;
 		}
 	}
-	
+
+	/**
+	 * Returns {@link Product} object with details obtained from Product table
+	 * 
+	 * @param productId
+	 *            id of the product to be searched
+	 * @return {@link Product} object of given Id
+	 */
 	public static Product read(String productId)
 	{
 		conn = ConnectionManager.getConnection();
@@ -59,7 +66,7 @@ public class ProductCRUD
 			ResultSet resultSet = stmnt.executeQuery(query);
 			if (resultSet.next())
 			{
-				
+
 				product.setId(resultSet.getString("id"));
 				product.setName(resultSet.getString("name"));
 				product.setManufacturer(resultSet.getString("manufacturer"));

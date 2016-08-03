@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,20 +45,24 @@ div {
 </style>
 <body>
 	<div>
-		<form>
-			<input type="radio" name="option" value="sales" checked>
-			Sales<br> <input type="radio" name="option" value="return">
+		<form method="get" action="/Shopper/shopManage/performTransaction">
+			<!-- refer values with TransactionType enum class -->
+			<input type="radio" name="transaction_type" value="1" checked>
+			Sales<br> <input type="radio" name="transaction_type" value="2">
 			Return<br>
+
 			<center>
-				<label for="ProductName">ProductName</label> <select
-					id="ProductName" name="ProductName">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-				</select> Quantity: <input type="text" name="Quantity" /> <input
-					type="submit" value="Submit">
+				<label for="ProductName">ProductName</label> 
+				<select id="ProductName" name=product_id>
+					<c:forEach items="${shopDataList}" var="data">
+						<option value="${data.productId}">${data.productName}</option>
+					</c:forEach>
+				</select> 
+				Quantity: <input type="text" name="quantity" /> 
+				<input type="submit" value="Submit">
 			</center>
 		</form>
+		${successMessage}
 	</div>
 </body>
 </html>
