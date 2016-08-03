@@ -1,6 +1,7 @@
 package com.shopper.controller;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -129,12 +130,15 @@ public class ShopManagementController
 				.getDistinctProductIds();
 		ArrayList<SemanticResult> semanticResults = SemanticAnalysis
 				.getListOfSemanticResults(distinctProductIds);
+		TreeMap<String, Integer> productSalePairs = ShoppingDataDao
+				.getProductSalePairs(shopId);
 
 		model.addAttribute("shop", ShopCRUD.read(shopId));
 		model.addAttribute("overallMaxSoldProduct",
 				ShoppingDataDao.getOverallMaxSoldProduct());
 		model.addAttribute("shopDataList", shopDataList);
 		model.addAttribute("semanticResults", semanticResults);
+		model.addAttribute("productSalePairs",productSalePairs);
 		return "shop-manage/analysis";
 	}
 }

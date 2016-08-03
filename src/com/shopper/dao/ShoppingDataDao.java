@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import com.shopper.entity.Product;
 import com.shopper.entity.SaleCategory;
@@ -105,6 +106,12 @@ public class ShoppingDataDao
 		}
 	}
 
+	/**
+	 * Calculates maximum selling product from all the stores. It will remain
+	 * common throughout all the stores
+	 * 
+	 * @return object of {@link Product} whose sale is maximum
+	 */
 	public static Product getOverallMaxSoldProduct()
 	{
 		conn = ConnectionManager.getConnection();
@@ -130,6 +137,15 @@ public class ShoppingDataDao
 		return product;
 	}
 
+	/**
+	 * Fill up the shopping data from ResultSet
+	 * 
+	 * @param resultSet
+	 *            ResultSet obtained from execution of current query
+	 * @return {@link ShoppingData} object with all the values filled
+	 *         accordingly
+	 * @throws SQLException
+	 */
 	private static ShoppingData fillShoppingData(ResultSet resultSet)
 			throws SQLException
 	{
@@ -159,5 +175,38 @@ public class ShoppingDataDao
 		data.setSaleCategory(saleCategory);
 
 		return data;
+	}
+
+	public static TreeMap<String, Integer> getProductSalePairs(String shopId)
+	{
+		conn = ConnectionManager.getConnection();
+		query = "SELECT product.id,product.name, "
+				+ "sum(shopping_data.left_quantity) AS left_quant, "
+				+ "sum(init_quantity) AS init_quant"
+				+ " FROM product,shopping_data"
+				+ " WHERE product.id = shopping_data.product_id"
+				+ " AND shopping_data.shop_id = \'" + shopId + "\'"
+				+ " GROUP BY shopping_data.product_id;";
+		TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+		try
+		{
+			Statement stmnt = conn.createStatement();
+			ResultSet resultSet = stmnt.executeQuery(query);
+
+			while (resultSet.next())
+			{
+				// Product name
+				String key = resultSet.getString("name");
+				// Product sale
+				int value = resultSet.getInt("init_quant")
+						- resultSet.getInt("left_quant");
+				map.put(key, value);
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return map;
 	}
 }
