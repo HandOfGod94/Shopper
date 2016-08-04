@@ -6,63 +6,76 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Transaction</title>
+<link rel="stylesheet"
+	href="<c:url value = "/resources/css/bootstrap.min.css" />">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value = "/resources/css/style.css"/>">
+<link href='https://fonts.googleapis.com/css?family=Lobster'
+	rel='stylesheet' type='text/css'>
 </head>
-<style>
-body {
-	background-color: lightgreen;
-}
-
-input[type=text], select {
-	width: 20%;
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: inline-block;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
-}
-
-input[type=submit] {
-	width: 20%;
-	background-color: #4CAF50;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-input[type=submit]:hover {
-	background-color: #45a049;
-}
-
-div {
-	border-radius: 5px;
-	background-color: #f2f2f2;
-	padding: 20px;
-}
-</style>
 <body>
-	<div>
-		<form method="get" action="/Shopper/shopManage/performTransaction">
-			<!-- refer values with TransactionType enum class -->
-			<input type="radio" name="transaction_type" value="1" checked>
-			Sales<br> <input type="radio" name="transaction_type" value="2">
-			Return<br>
 
-			<center>
-				<label for="ProductName">ProductName</label> 
-				<select id="ProductName" name=product_id>
-					<c:forEach items="${shopDataList}" var="data">
-						<option value="${data.productId}">${data.productName}</option>
-					</c:forEach>
-				</select> 
-				Quantity: <input type="text" name="quantity" /> 
-				<input type="submit" value="Submit">
-			</center>
-		</form>
-		${successMessage}
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script src="<c:url value = "/resources/js/bootstrap.min.js"/>"></script>
+
+	<!-- Nav bar -->
+	<nav class="navbar navbar-default navbar-static">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button class="collapsed navbar-toggle" type="button"
+				data-toggle="collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Shopper</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a href="/Shopper/">Home</a></li>
+		</ul>
 	</div>
+	</nav>
+
+	<!-- ---------------------------------- -->
+
+	<div class="container">
+		<h1>Transaction</h1>
+		<form class="form-horizontal"
+			action="/Shopper/shopManage/performTransaction" method="get">
+			<div class="form-group">
+				<label for="rating" class="col-sm-2 control-label">Select
+					Transaction</label>
+				<div class="col-sm-10">
+					<label class="radio-inline"> <input type="radio"
+						name="transaction_type" value="1">Sales
+					</label> <label class="radio-inline"> <input type="radio"
+						name="transaction_type" value="2">Return
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="product" class="col-sm-2 control-label">Product</label>
+				<div class="col-sm-10">
+					<select class="form-control" name="product_id">
+						<c:forEach items="${shopDataList}" var="data">
+							<option value="${data.productId}">${data.productName}</option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="quantity" class="col-sm-2 control-label">Quantity</label>
+				<div class="col-sm-10">
+					<input class="form-control" type="text" name="quantity">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<input type="submit" value="Submit" class="btn btn-default" />
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<div class="col-sm-offset-2 col-sm-10 ${typeOfSuccess}">${successMessage}</div>
+		</div>
 </body>
 </html>

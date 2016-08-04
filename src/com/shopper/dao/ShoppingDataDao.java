@@ -136,6 +136,37 @@ public class ShoppingDataDao
 		}
 		return product;
 	}
+	
+	/**
+	 * Calculates minimum selling product from all the stores. It will remain
+	 * common throughout all the stores
+	 * 
+	 * @return object of {@link Product} whose sale is minimum
+	 */
+	public static Product getOverallLeastSoldProduct()
+	{
+		conn = ConnectionManager.getConnection();
+		query = "SELECT product_id, SUM(init_quantity)-SUM(left_quantity) AS sold"
+				+ " FROM shopper.shopping_data"
+				+ " GROUP BY product_id"
+				+ " ORDER BY sold " + " LIMIT 0,1;";
+
+		Product product = null;
+		try
+		{
+			Statement stmnt = conn.createStatement();
+			ResultSet resultSet = stmnt.executeQuery(query);
+			if (resultSet.next())
+			{
+				String productId = resultSet.getString("product_id");
+				product = ProductCRUD.read(productId);
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return product;
+	}
 
 	/**
 	 * Fill up the shopping data from ResultSet

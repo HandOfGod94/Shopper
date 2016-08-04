@@ -1,0 +1,45 @@
+	body{
+		background-image: url(images.png);
+		background-repeat: no-repeat;
+	}
+h1{
+	font-family: 'Lobster', cursive;
+}
+h2{
+font-family: 'Anton', sans-serif;
+
+}
+.col-md-4{
+	margin-top: 35px;
+	background-color: 
+}
+
+.form-login {
+    background-color: #EDEDED;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color:#d2d2d2;
+    border-width: 5px;
+    box-shadow:0 1px 0 #cfcfcf;
+}
+
+h4 { 
+ border:0 solid #fff; 
+ border-bottom-width:1px;
+ padding-bottom:10px;
+ text-align: center;
+}
+
+.form-control {
+    border-radius:10px;
+    margin-top:30px;
+    margin-left:5px;
+}
+
+.wrapper {
+	margin-top: 20px;
+    text-align: center;
+}

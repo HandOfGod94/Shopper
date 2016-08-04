@@ -16,7 +16,7 @@ public class UserCommentController
 	 * User comment view where user can interact with application 
 	 * for submitting feedback
 	 * @param model {@link ModelMap} of the application for handling attributes
-	 * @return String having full path to user commment view
+	 * @return String having full path to user comment view
 	 */
 	@RequestMapping(value="/userComment", method=RequestMethod.GET)
 	public String userComment(ModelMap model)
@@ -36,7 +36,7 @@ public class UserCommentController
 	public String addUserComment(@ModelAttribute("SpringWeb")UserComment userComment, ModelMap model)
 	{
 		boolean insert = UserCommentCRUD.insert(userComment);
-		model.addAttribute("message", insert);
+		model.addAttribute("typeOfResult", (insert)?"success":"error");
 		model.addAttribute("result", (insert)?"Successfully Added":"Oops some error");
 		return "userComment";
 	}

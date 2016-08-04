@@ -73,6 +73,8 @@ public class ShopManagementController
 	@RequestMapping("shopManage/transaction")
 	public String transaction(ModelMap model, HttpSession session)
 	{
+		if (session.getAttribute("id") == null)
+			return "redirect:/shopManage";
 		String shopId = (String) session.getAttribute("id");
 		ArrayList<ShoppingData> shopDataList = ShoppingDataDao.read(shopId);
 		model.addAttribute("shopDataList", shopDataList);
@@ -104,6 +106,7 @@ public class ShopManagementController
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
 		success = ShoppingDataDao.update(productId, shopId, quantity,
 				transactionType);
+		model.addAttribute("typeOfSuccess", (success) ? "success" : "error");
 		model.addAttribute("successMessage", (success) ? "Successfully Updated"
 				: "Oops some error");
 		return "shop-manage/transaction";
@@ -124,6 +127,8 @@ public class ShopManagementController
 	@RequestMapping("shopManage/analysis")
 	public String analysis(ModelMap model, HttpSession session)
 	{
+		if (session.getAttribute("id") == null)
+			return "redirect:/shopManage";
 		String shopId = (String) session.getAttribute("id");
 		ArrayList<ShoppingData> shopDataList = ShoppingDataDao.read(shopId);
 		ArrayList<String> distinctProductIds = UserCommentCRUD
@@ -136,9 +141,11 @@ public class ShopManagementController
 		model.addAttribute("shop", ShopCRUD.read(shopId));
 		model.addAttribute("overallMaxSoldProduct",
 				ShoppingDataDao.getOverallMaxSoldProduct());
+		model.addAttribute("overallLeastSoldProduct",
+				ShoppingDataDao.getOverallLeastSoldProduct());
 		model.addAttribute("shopDataList", shopDataList);
 		model.addAttribute("semanticResults", semanticResults);
-		model.addAttribute("productSalePairs",productSalePairs);
+		model.addAttribute("productSalePairs", productSalePairs);
 		return "shop-manage/analysis";
 	}
 }
