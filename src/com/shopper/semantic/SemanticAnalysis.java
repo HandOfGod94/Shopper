@@ -14,7 +14,7 @@ public class SemanticAnalysis
 	 * Collects all the comments of a particular product and 
 	 * returns 
 	 * @param productId
-	 * @return
+	 * @return SemanticResult Enum
 	 */
 	private static SemanticResult getResult(String productId)
 	{

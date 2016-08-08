@@ -1,3 +1,6 @@
+<%@page import="com.shopper.dao.ShoppingDataDao"%>
+<%@page import="com.shopper.entity.ShoppingData"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -14,7 +17,7 @@
 	rel='stylesheet' type='text/css'>
 </head>
 <body>
-
+	<% ArrayList<ShoppingData> shopDataList = ShoppingDataDao.read((String)session.getAttribute("id"));	 %>
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<script src="<c:url value = "/resources/js/bootstrap.min.js"/>"></script>
 
@@ -45,17 +48,17 @@
 				<label for="rating" class="col-sm-2 control-label">Select
 					Transaction</label>
 				<div class="col-sm-10">
-					<label class="radio-inline"> <input type="radio"
-						name="transaction_type" value="1">Sales
-					</label> <label class="radio-inline"> <input type="radio"
-						name="transaction_type" value="2">Return
+					<label class="radio-inline"> 
+					<input type="radio" name="transaction_type" value="1" required>Sales
+					</label> <label class="radio-inline"> 
+					<input type="radio" name="transaction_type" value="2">Return
 					</label>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="product" class="col-sm-2 control-label">Product</label>
 				<div class="col-sm-10">
-					<select class="form-control" name="product_id">
+					<select class="form-control" name="product_id" required>
 						<c:forEach items="${shopDataList}" var="data">
 							<option value="${data.productId}">${data.productName}</option>
 						</c:forEach>
@@ -65,7 +68,7 @@
 			<div class="form-group">
 				<label for="quantity" class="col-sm-2 control-label">Quantity</label>
 				<div class="col-sm-10">
-					<input class="form-control" type="text" name="quantity">
+					<input class="form-control" type="number" name="quantity" required>
 				</div>
 			</div>
 			<div class="form-group">

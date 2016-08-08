@@ -85,22 +85,44 @@ function drawChart() {
 	</div>
 	<div class="row"> 
 		<div class="col-md-4 " >
-			<h2 class="text-center">Best Sold Product</h2>
+			<div class="row">
+			<h2 class="text-center">Overall Best Selling Product</h2>
 				<h4>${overallMaxSoldProduct.name}</h4>
 				<ul>
 					<li><strong>Manufacturer:</strong>${overallMaxSoldProduct.manufacturer}</li>
 					<li><strong>Category:</strong>${overallMaxSoldProduct.category}</li>
 					<li><strong>Price:</strong>${overallMaxSoldProduct.price}</li>
 				</ul>
+			</div>
+			<div class="row">
+			<h2 class="text-center">Shop's Best Selling Product</h2>
+				<h4>${shopMaxSoldProduct.name}</h4>
+				<ul>
+					<li><strong>Manufacturer:</strong>${shopMaxSoldProduct.manufacturer}</li>
+					<li><strong>Category:</strong>${shopMaxSoldProduct.category}</li>
+					<li><strong>Price:</strong>${shopMaxSoldProduct.price}</li>
+				</ul>
+			</div>
 		</div>
 		<div class="col-md-4">
-			<h2 class="text-center">Least sold Product</h2>
+			<div class="row">
+			<h2 class="text-center">Overall Least Selling Product</h2>
 				<h4>${overallLeastSoldProduct.name}</h4>
 				<ul>
 					<li><strong>Manufacturer:</strong>${overallLeastSoldProduct.manufacturer}</li>
 					<li><strong>Category:</strong>${overallLeastSoldProduct.category}</li>
 					<li><strong>Price:</strong>${overallLeastSoldProduct.price}</li>
 				</ul>
+			</div>
+			<div class="row">
+			<h2 class="text-center">Shop's Least Selling Product</h2>
+				<h4>${shopLeastSoldProduct.name}</h4>
+				<ul>
+					<li><strong>Manufacturer:</strong>${shopLeastSoldProduct.manufacturer}</li>
+					<li><strong>Category:</strong>${shopLeastSoldProduct.category}</li>
+					<li><strong>Price:</strong>${shopLeastSoldProduct.price}</li>
+				</ul>
+			</div>
 		</div>
 		<div class="col-md-4">
 			<h2 class="text-center">Pie Chart</h2>
@@ -114,7 +136,6 @@ function drawChart() {
 			<h1> Sales Analysis</h1></div>
 		</div>
 		<table class="table table-striped">
-			<caption>Sales Analysis</caption>
 			<thead>
 				<tr>
 					<th>S.No.</th>
@@ -133,8 +154,8 @@ function drawChart() {
 					<td>${data.productName}</td>
 					<td>${data.salePercent}</td>
 					<td>${data.saleCategory}</td>
-					<td>${semanticResults.get(i)}</td>
-				<tr>
+					<td>${semanticResults.get(i-1).toString()}</td>
+				</tr>
 				</c:forEach>	
 			</tbody>
 		</table>

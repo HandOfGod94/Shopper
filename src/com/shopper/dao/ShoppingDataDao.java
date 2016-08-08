@@ -137,6 +137,32 @@ public class ShoppingDataDao
 		return product;
 	}
 	
+	
+	public static Product getShopMaxSoldProduct(String shopId)
+	{
+		conn = ConnectionManager.getConnection();
+		query = "SELECT product_id, SUM(init_quantity)-SUM(left_quantity) AS sold"
+				+ " FROM shopper.shopping_data WHERE shop_id = '" + shopId + "'" 
+				+ " GROUP BY product_id"
+				+ " ORDER BY sold DESC" + " LIMIT 0,1;";
+
+		Product product = null;
+		try
+		{
+			Statement stmnt = conn.createStatement();
+			ResultSet resultSet = stmnt.executeQuery(query);
+			if (resultSet.next())
+			{
+				String productId = resultSet.getString("product_id");
+				product = ProductCRUD.read(productId);
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return product;
+	}
+	
 	/**
 	 * Calculates minimum selling product from all the stores. It will remain
 	 * common throughout all the stores
@@ -167,7 +193,32 @@ public class ShoppingDataDao
 		}
 		return product;
 	}
+	
+	public static Product getShopLeastSoldProduct(String shopId)
+	{
+		conn = ConnectionManager.getConnection();
+		query = "SELECT product_id, SUM(init_quantity)-SUM(left_quantity) AS sold"
+				+ " FROM shopper.shopping_data WHERE shop_id = '" + shopId + "'" 
+				+ " GROUP BY product_id"
+				+ " ORDER BY sold" + " LIMIT 0,1;";
 
+		Product product = null;
+		try
+		{
+			Statement stmnt = conn.createStatement();
+			ResultSet resultSet = stmnt.executeQuery(query);
+			if (resultSet.next())
+			{
+				String productId = resultSet.getString("product_id");
+				product = ProductCRUD.read(productId);
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return product;
+	}
+	
 	/**
 	 * Fill up the shopping data from ResultSet
 	 * 

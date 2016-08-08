@@ -10,37 +10,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User Comment</title>
-<script language="javascript">
-function check()  
-{
-
-	chosen = ""
-	len = document.myform.chk.length
-	cmt=document.myform.comment.value.length
-	
-	for (i = 0; i <len; i++) 
-	{
-		if (document.myform.chk[i].checked)
-		{
-			chosen = document.myform.chk[i].value
-		}
-	}
-
-	if (chosen == "" ) 
-	{
-		alert("Please Select Rating");
-		return false;
-	}
-	else if(cmt=="" || cmt<=4) {
-		alert( "Please enter comment");
-		
-	}
-	else
-		document.forms["myform"].submit();
-	
-}
-
-</script>
 <link rel="stylesheet"
 	href="<c:url value = "/resources/css/bootstrap.min.css" />">
 <link rel="stylesheet" type="text/css"
@@ -83,7 +52,7 @@ function check()
 			<div class="form-group">
 				<label for="product" class="col-sm-2 control-label">Product</label>
 				<div class="col-sm-10">
-					<select class="form-control" name="productId">
+					<select class="form-control" name="productId" required>
 						<% for(Product product:products) { %>
 						<option value="<%=product.getId() %>"><%= product.getName() %></option>
 						<% } %>
@@ -95,15 +64,15 @@ function check()
 				<div class="col-sm-10">
 					<% for (int i = 0; i < 10; i++) { %>
 					<label class="radio-inline"> 
-					<input type="radio" name="rating"  value=<%=(i + 1)%> /> <%=(i+1) %> &nbsp; &nbsp;
+					<input type="radio" name="rating"  value=<%=(i + 1)%> required/> <%=(i+1) %> &nbsp; &nbsp;
 					</label>
 					<% } %>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" required>
 				<label for="comment" class="col-sm-2 control-label">Comment</label>
 				<div class="col-sm-10">
-					<textarea class="form-control" rows="3" name="comment"></textarea>
+					<textarea class="form-control" rows="3" name="comment" required></textarea>
 				</div>
 			</div>
 			<div class="form-group">
@@ -112,7 +81,7 @@ function check()
 				</div>
 			</div>
 		</form>
-		<span class="${typeOfResult}">${result}</span>
+		<span class="col-sm-offset-2 ${typeOfResult}">${result}</span>
 	</div>
 </body>
 </html>

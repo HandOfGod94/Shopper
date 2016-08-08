@@ -17,7 +17,7 @@
 		<div class="form-login">
 		<form action="/Shopper/" method="get">
             <h1 class="row text-center" >Shopper Login</h1>
-            	<input type="text" name="id" class="row form-control input-sm chat-input" placeholder="Shop ID" />
+            	<input type="text" id="shop-id-login" name="id" class=" row input-sm form-control chat-input" placeholder="Shop ID" />
             	<div class="wrapper">
             	<span class="group-btn row">
             		<input type="submit" value="Sumbit" class= "btn btn-primary btn-md"/>

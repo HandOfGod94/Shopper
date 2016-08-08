@@ -141,8 +141,10 @@ public class ShopManagementController
 		model.addAttribute("shop", ShopCRUD.read(shopId));
 		model.addAttribute("overallMaxSoldProduct",
 				ShoppingDataDao.getOverallMaxSoldProduct());
+		model.addAttribute("shopMaxSoldProduct", ShoppingDataDao.getShopMaxSoldProduct(shopId));
 		model.addAttribute("overallLeastSoldProduct",
 				ShoppingDataDao.getOverallLeastSoldProduct());
+		model.addAttribute("shopLeastSoldProduct", ShoppingDataDao.getShopLeastSoldProduct(shopId));
 		model.addAttribute("shopDataList", shopDataList);
 		model.addAttribute("semanticResults", semanticResults);
 		model.addAttribute("productSalePairs", productSalePairs);
